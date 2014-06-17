@@ -14,8 +14,16 @@
       search_placeholder: "search",
     }, options);
 
-    return this.each(function() {
+    //Make jQuery :contains Case-Insensitive
+    //http://css-tricks.com/snippets/jquery/make-jquery-contains-case-insensitive/
+  $.expr[":"].contains = $.expr.createPseudo(function(arg) {
+    return function( elem ) {
+      return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+    };
+  });
 
+    return this.each(function() {
+      
       var search_id = this.id + '_search';
 
       jQuery('<input/>', {
